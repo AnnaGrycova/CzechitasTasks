@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lekce 6 - ukol z hodiny, dedicnost, abstrakce", "Lekce 6 - ukol z hodiny, dedicnost, abstrakce.csproj", "{CEE29835-A3FA-417D-9912-0402557DFA7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEE29835-A3FA-417D-9912-0402557DFA7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEE29835-A3FA-417D-9912-0402557DFA7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEE29835-A3FA-417D-9912-0402557DFA7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEE29835-A3FA-417D-9912-0402557DFA7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F4F2331-7DF8-4EF9-A80B-E8E23CC0FF91}
+	EndGlobalSection
+EndGlobal
