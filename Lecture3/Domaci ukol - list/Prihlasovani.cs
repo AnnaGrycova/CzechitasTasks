@@ -77,8 +77,8 @@ namespace Domaci_ukol___list
             ZapisPredmet(studentNovak, "P031");
             ZapisPredmet(studentNovak, "X222");
 
-            bool maZapsany = studentNovak.ZapsaneAbsolvovanePredmety.Contains(new Predmet("P030", "Principy programovacích jazyků a OOP", new List<string> { "X111" }));
-            Console.WriteLine(maZapsany);
+            //bool maZapsany = studentNovak.ZapsaneAbsolvovanePredmety.Contains(new Predmet("P030", "Principy programovacích jazyků a OOP", new List<string> { "X111" }));
+            //Console.WriteLine(maZapsany);
         }
 
         private void ZkontrolujKatalog(Dictionary<string, Predmet> katalog)
