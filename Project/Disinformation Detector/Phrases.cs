@@ -4,9 +4,13 @@ using System.Text;
 
 namespace Disinformation_Detector
 {
-    interface IScoring
+    enum Keywords
     {
-        const int Weight = 1;
-        double GetScore(Article article);
+        odhaleni,
+        lez,
+        pravda,
+        exkluzivne,
+        sdilejte,
+        smazou,
     }
 }

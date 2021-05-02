@@ -15,7 +15,8 @@ namespace Disinformation_Detector
  | |) || |(_-<| || ' \))|  _|/ _ \| '_|| '  \()/ _` ||  _| | |/ _ \| ' \))  | |) |/ -_) |  _|/ -_)/ _| |  _|/ _ \| '_| 
  |___/ |_|/__/|_||_||_| |_|  \___/|_|  |_|_|_| \__,_| \__| |_|\___/|_||_|   |___/ \___|  \__|\___|\__|  \__|\___/|_| ");
 
-UserInputReader.readInput();
+            Manager manager = new Manager();
+            manager.EvaluateScore(manager.ReadFromConsole());
         }
     }
 }
