@@ -22,6 +22,7 @@ namespace Disinformation_Detector
                 Web web = new Web(domain);
             }
             string body = UserInputReader.ReadMandatory("Insert a body of article:", UserInputValidator.IsNotNullOrEmpty);
+            body = RemoveDiacritics(body);
             string publishedOnInput = UserInputReader.ReadOptional("Insert a date article was published (DD.MM.YYYY or MM.YYYY):", UserInputValidator.IsEmptyOrDateTime);
             DateTime? publishedOn = null;
             if (!String.IsNullOrEmpty(publishedOnInput))
@@ -45,8 +46,19 @@ namespace Disinformation_Detector
         private static bool UserAllowsEmpty()
         {
             Console.WriteLine("Do you want to leave this field blank? [yes]/no");
-            string answer = Console.ReadLine();
-            return answer.ToLower() == "yes" || answer.ToLower() == "y" || String.IsNullOrEmpty(answer);
+            string answer;
+            bool answerIsValid;
+            do
+            {
+                answer = Console.ReadLine();
+                answerIsValid = answer.ToLower() == "yes" || answer.ToLower() == "no" || String.IsNullOrEmpty(answer);
+                if (!answerIsValid)
+                {
+                    Console.WriteLine("Answer is not valid");
+                    Console.WriteLine("Do you want to leave this field blank? [yes]/no");
+                }
+            } while (!answerIsValid);
+            return answer.ToLower() == "yes" || String.IsNullOrEmpty(answer);
         }
         private static string ReadInput(string message)
         {
