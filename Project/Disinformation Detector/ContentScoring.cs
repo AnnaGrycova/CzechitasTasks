@@ -53,8 +53,8 @@ namespace Disinformation_Detector
             }
            
             Match m = Regex.Match(article.Body, @"!{2,}", RegexOptions.IgnoreCase);
-            bool moreThanOneExMark = m.Success;
-            if (moreThanOneExMark)
+            bool moreThanOneExclamationMark = m.Success;
+            if (moreThanOneExclamationMark)
             {
                 score += 0.5;
             }

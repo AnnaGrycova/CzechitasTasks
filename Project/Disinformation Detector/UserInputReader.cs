@@ -10,17 +10,10 @@ namespace Disinformation_Detector
     {
         public static Article readInput()
         {
-            string authorFirstName = UserInputReader.ReadOptional("Insert an author's first name:");
-            string authorLastName = UserInputReader.ReadOptional("Insert an author's last name:");
+            string authorFirstName = UserInputReader.ReadOptional("Insert an author's first name (Insert 'not mentioned' if author is not mentioned):");
+            string authorLastName = UserInputReader.ReadOptional("Insert an author's last name (Insert 'not mentioned' if author is not mentioned):");
             string title = UserInputReader.ReadOptional("Insert a title:");
             string url = UserInputReader.ReadOptional("Insert a URL:", UserInputValidator.IsUrl);
-            string domain;
-            if (!String.IsNullOrEmpty(url))
-            {
-                Uri myUri = new Uri(url);
-                domain = myUri.Host;
-                Web web = new Web(domain);
-            }
             string body = UserInputReader.ReadMandatory("Insert a body of article:", UserInputValidator.IsNotNullOrEmpty);
             body = RemoveDiacritics(body);
             string publishedOnInput = UserInputReader.ReadOptional("Insert a date article was published (DD.MM.YYYY or MM.YYYY):", UserInputValidator.IsEmptyOrDateTime);

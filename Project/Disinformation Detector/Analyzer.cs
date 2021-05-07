@@ -10,9 +10,9 @@ namespace Disinformation_Detector
         List<IScoring> ScoringTypes = new List<IScoring>()
         {
             new AuthorScoring { Weight = 0.4 },
-            new ContentScoring { Weight = 1},
-            new SourceScoring { Weight = 0.8},
-            new URLScoring { Weight = 0.8}
+            new ContentScoring { Weight = 1 },
+            new SourceScoring { Weight = 0.8 },
+            new URLScoring { Weight = 0.8 }
         };
         public double EvaluateScore(Article article) //iteration through scoring types
         {

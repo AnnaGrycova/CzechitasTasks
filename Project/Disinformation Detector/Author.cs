@@ -20,5 +20,10 @@ namespace Disinformation_Detector
             FirstName = firstName;
             LastName = lastName;
         }
+
+        public override bool Equals(object obj)
+        {
+            return FirstName == (obj as Author).FirstName && LastName == (obj as Author).LastName;
+        }
     }
 }

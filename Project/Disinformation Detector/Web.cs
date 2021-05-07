@@ -17,5 +17,9 @@ namespace Disinformation_Detector
             Domain = domain;
             Credibility = credibility;
         }
+
+        public Web()
+        {
+        }
     }
 }
