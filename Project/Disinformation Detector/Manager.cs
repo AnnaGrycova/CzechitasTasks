@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Reflection;
 
 namespace Disinformation_Detector
 {
@@ -44,8 +43,8 @@ namespace Disinformation_Detector
 
         public void readFromCsv(Dictionary<string, Web> dictionaryOfQuestionableWeb)
         {
-            var outPutDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            string fileName = "zoznamKonspiracnichWebu.csv";
+            var outPutDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string fileName = "WebPagesData.csv";
 
             using (TextFieldParser csvParser = new TextFieldParser(Path.Combine(outPutDirectory, fileName)))
             {
