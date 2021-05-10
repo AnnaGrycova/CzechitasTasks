@@ -17,10 +17,7 @@ namespace Disinformation_Detector
 
         public static bool IsUrl(string url)
         {
-            //Uri uriResult;
-            //bool result = Uri.TryCreate(url, UriKind.Absolute, out uriResult)
-            //    && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
-            return (!UserInputValidator.IsNotNullOrEmpty(url) || Uri.IsWellFormedUriString(url, UriKind.Absolute));
+            return (Uri.IsWellFormedUriString(url, UriKind.Absolute));
         }
 
         public static bool IsNotNullOrEmpty(string input)

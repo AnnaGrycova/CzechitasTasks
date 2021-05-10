@@ -27,7 +27,7 @@ namespace Disinformation_Detector
             double score = 0;
             if (ListOfQuestionableAuthors.Contains(article.Author))
             {
-                score += 1;
+                score += 0.8;
             }
             return score;            
         }

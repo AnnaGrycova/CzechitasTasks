@@ -17,7 +17,7 @@ namespace Disinformation_Detector
 
         public Manager()
         {
-                readFromCsv(WebPages);
+            readFromCsv(WebPages);
         }
         public Article ReadFromConsole()
         {

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Globalization;
+using System.IO;
+using HtmlAgilityPack;
+using System.Web;
 
 namespace Disinformation_Detector
 {
@@ -12,9 +15,12 @@ namespace Disinformation_Detector
         {
             string authorFirstName = UserInputReader.ReadOptional("Insert an author's first name (Insert 'not mentioned' if author is not mentioned):");
             string authorLastName = UserInputReader.ReadOptional("Insert an author's last name (Insert 'not mentioned' if author is not mentioned):");
+            string url = UserInputReader.ReadMandatory("Insert a URL:", UserInputValidator.IsUrl);
             string title = UserInputReader.ReadOptional("Insert a title:");
-            string url = UserInputReader.ReadOptional("Insert a URL:", UserInputValidator.IsUrl);
-            string body = UserInputReader.ReadMandatory("Insert a body of article:", UserInputValidator.IsNotNullOrEmpty);
+            string body;
+            using (var wc = new System.Net.WebClient())
+                body = wc.DownloadString(url);
+            body = SanitizeHtml(body);
             body = RemoveDiacritics(body);
             string publishedOnInput = UserInputReader.ReadOptional("Insert a date article was published (DD.MM.YYYY or MM.YYYY):", UserInputValidator.IsEmptyOrDateTime);
             DateTime? publishedOn = null;
@@ -70,7 +76,7 @@ namespace Disinformation_Detector
                 {
                     Console.WriteLine("Input is not valid. Please, try it again.");
                 }
-            } while (!inputIsValid);            
+            } while (!inputIsValid);    
             return input;
         }
 
@@ -94,13 +100,46 @@ namespace Disinformation_Detector
             return input;
         }
 
-        static string RemoveDiacritics(this string text)
+        static string RemoveDiacritics(string text)
         {
             //if (string.IsNullOrWhiteSpace(text))
             //    return text;
             text = text.Normalize(NormalizationForm.FormD);
             var chars = text.Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark).ToArray();
             return new string(chars).Normalize(NormalizationForm.FormC);
+        }
+
+        static string SanitizeHtml(string data)
+        {
+            //https://stackoverflow.com/a/12836974
+            if (string.IsNullOrEmpty(data)) return string.Empty;
+
+            var document = new HtmlDocument();
+            document.LoadHtml(data);
+
+            var acceptableTags = new String[] { "a" };
+
+            var nodes = new Queue<HtmlNode>(document.DocumentNode.SelectNodes("./*|./text()"));
+            while (nodes.Count > 0)
+            {
+                var node = nodes.Dequeue();
+                var parentNode = node.ParentNode;
+
+                if (!acceptableTags.Contains(node.Name) && node.Name != "#text")
+                {
+                    var childNodes = node.SelectNodes("./*|./text()");
+                    if (childNodes != null)
+                    {
+                        foreach (var child in childNodes)
+                        {
+                            nodes.Enqueue(child);
+                            parentNode.InsertBefore(child, node);
+                        }
+                    }
+                    parentNode.RemoveChild(node);
+                }
+            }
+            return document.DocumentNode.InnerHtml;
         }
     }
 }
