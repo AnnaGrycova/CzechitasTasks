@@ -15,11 +15,25 @@ namespace Disinformation_Detector
         {
             string authorFirstName = UserInputReader.ReadOptional("Insert an author's first name (Insert 'not mentioned' if author is not mentioned):");
             string authorLastName = UserInputReader.ReadOptional("Insert an author's last name (Insert 'not mentioned' if author is not mentioned):");
-            string url = UserInputReader.ReadMandatory("Insert a URL:", UserInputValidator.IsUrl);
             string title = UserInputReader.ReadOptional("Insert a title:");
-            string body;
-            using (var wc = new System.Net.WebClient())
-                body = wc.DownloadString(url);
+            string url = "";
+            string body = "";
+            bool isValid;
+            using (var wc = new System.Net.WebClient())                
+                do
+                {
+                    try
+                    {
+                        url = UserInputReader.ReadMandatory("Insert a URL:", UserInputValidator.IsUrl);
+                        body = wc.DownloadString(url);
+                        isValid = true;
+                    }
+                    catch (System.Net.WebException)
+                    {
+                        isValid = false;
+                        Console.WriteLine("URL address does not exist.");
+                    }
+                } while (!isValid);
             body = SanitizeHtml(body);
             body = RemoveDiacritics(body);
             string publishedOnInput = UserInputReader.ReadOptional("Insert a date article was published (DD.MM.YYYY or MM.YYYY):", UserInputValidator.IsEmptyOrDateTime);

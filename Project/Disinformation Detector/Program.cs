@@ -16,7 +16,7 @@ namespace Disinformation_Detector
  |___/ |_|/__/|_||_||_| |_|  \___/|_|  |_|_|_| \__,_| \__| |_|\___/|_||_|   |___/ \___|  \__|\___|\__|  \__|\___/|_| ");
 
             Manager manager = new Manager();
-            Console.WriteLine($"Score of article: {manager.EvaluateScore(manager.ReadFromConsole())}");
+            manager.EvaluateScore(manager.ReadFromConsole());
             Console.ReadLine();
         }
     }

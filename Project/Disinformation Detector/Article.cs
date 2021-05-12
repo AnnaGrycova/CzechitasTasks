@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿#nullable enable
+using System;
+
 
 namespace Disinformation_Detector
 {
     class Article
     {
         public string? Title { get; set; }
-        public string Body { get; set; } //optional in case URL is inserted and article will be downloaded
+        public string Body { get; set; }
         public DateTime? PublishedOn { get; set; }
         public Author? Author { get; set; }
-        public Uri? URL { get; set; }
+        public Uri URL { get; set; }
         public Web? Web { get; set; }
-        public string? Domain
+        public string Domain
         {
             get
             {
-                if (URL is null)
-                {
-                    return null;
-                }
                 if (URL.Host.ToLower().StartsWith("www"))
                     {
                     return URL.Host.Substring(4);
@@ -35,10 +31,7 @@ namespace Disinformation_Detector
             Body = body;
             PublishedOn = publishedOn;
             Author = author;
-            if (!String.IsNullOrEmpty(url))
-            {
-                URL = new Uri(url);
-            }            
+            URL = new Uri(url);
         }
        
     }

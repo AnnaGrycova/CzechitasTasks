@@ -36,9 +36,9 @@ namespace Disinformation_Detector
             }
             return article;
         }
-        public double EvaluateScore(Article article)
+        public void EvaluateScore(Article article)
         {
-            return analyzer.EvaluateScore(article);
+            analyzer.EvaluateScore(article);
         }
 
         public void readFromCsv(Dictionary<string, Web> dictionaryOfQuestionableWeb)
